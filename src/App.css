@@ -36,3 +36,83 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 20px;
+}
+
+#namespaces {
+  display: flex;
+  flex-direction: column;
+  background-color: #61dafb;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 15px;
+}
+#namespaces-inside {
+  margin-bottom: 15px;
+}
+#namespaces-outside {
+  margin-bottom: 15px;
+}
+#namespaces-header-input {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+#chatarea {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #b0dea2;
+  border: #282c34;
+  border-width: 2px;
+  border-style: solid;
+  padding: 10px;
+  input {
+    width: 95%;
+  }
+}
+#chatheader {
+  display: flex;
+  background-color: #b0dea2;
+  
+}
+#namespaces-inside {
+  background-color: #f3d328;
+  border: black;
+  border-style: solid;
+  border-width: 2px;
+  padding: 10px;
+}
+#chatarea-inside {
+  margin-top: 15px;
+}
+
+#chatarea-header-input {
+  display: flex;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+#addRooms {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+#addNamespace {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin-right: 10px;
+  }
+}
