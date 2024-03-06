@@ -62,10 +62,10 @@ function App() {
 
         const updatedNamespaces = [...prevNamespaces];
         updatedNamespaces[index] = updatedNamespace;
-        console.log(
-          '🚀 | setNamespaces | updatedNamespaces:',
-          updatedNamespaces
-        );
+        // console.log(
+        //   '🚀 | setNamespaces | updatedNamespaces:',
+        //   updatedNamespaces
+        // );
         return updatedNamespaces;
       });
     },

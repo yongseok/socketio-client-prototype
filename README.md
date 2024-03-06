@@ -1,46 +1,42 @@
-# Getting Started with Create React App
+# Client Installation
+https://socket.io/docs/v4/client-api/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+### From a CDN
+```html
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js" integrity="sha384-Gr6Lu2Ajx28mzwyVR8CFkULdCU7kMlZ9UthllibdOSo6qAiN+yXNHqtgdTvFXMT4" crossorigin="anonymous"></script>
+```
 
-In the project directory, you can run:
+### From NPM
+```zsh
+pnpm add socket.io-client
+```
 
-### `npm start`
+### 폴더 구조
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+/messenger-client
+├── /public
+│   ├── index.html
+│   └── ...
+├── /src
+│   ├── /components
+│   │   ├── App.tsx
+│   │   ├── NameSpace.tsx
+│   │   └── ...
+│   ├── /contexts
+│   │   └── SocketContext.tsx
+│   ├── /hooks
+│   │   └── useSocket.ts
+│   ├── /utils
+│   │   └── getUuid.ts
+│   ├── index.tsx
+│   └── ...
+├── package.json
+├── tsconfig.json
+└── ...
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- components: React 컴포넌트를 저장하는 폴더입니다. 각 컴포넌트는 자체 폴더를 가질 수 있으며, 그 안에는 관련 스타일시트와 테스트 파일이 포함될 수 있습니다.
+- contexts: React Context를 사용하여 앱 전체에서 사용할 수 있는 상태를 저장하는 폴더입니다. 이 경우 Socket.IO의 연결을 관리하는 SocketContext를 저장할 수 있습니다.
+- hooks: 커스텀 훅을 저장하는 폴더입니다. 예를 들어, Socket.IO의 연결을 관리하는 useSocket 훅을 저장할 수 있습니다.
+- utils: 유틸리티 함수를 저장하는 폴더입니다. 예를 들어, UUID를 생성하는 getUuid 함수를 저장할 수 있습니다.
