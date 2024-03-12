@@ -1,17 +1,16 @@
-import React, { useCallback, useEffect } from 'react';
-// import './App.css';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 import { useState } from 'react';
-import NameSpace from './NameSpace';
+import NameSpace, { NamespaceType } from './NameSpace';
+import { UserInfoProvider } from './UserInfoContext';
 
 export const getUuid = (): string => {
   return Math.random().toString(36).substring(7);
-};
-
-export type NamespaceType = {
-  id: string;
-  host: string;
-  namespace: string;
-  port: number;
 };
 
 function App() {
@@ -79,17 +78,19 @@ function App() {
         <div id='namespaces-outside'>
           {namespaces.map((namespace, index) => {
             return (
-              <NameSpace
-                key={namespace.id}
-                id={namespace.id}
-                host={namespace.host}
-                namespace={namespace.namespace}
-                port={namespace.port}
-                closeNamespace={() => closeNamespace(namespace.id)}
-                onUpdate={(updatedNamespace) =>
-                  updateNamespaceHandler(updatedNamespace)
-                }
-              />
+              <UserInfoProvider>
+                <NameSpace
+                  key={namespace.id}
+                  id={namespace.id}
+                  host={namespace.host}
+                  namespace={namespace.namespace}
+                  port={namespace.port}
+                  closeNamespace={() => closeNamespace(namespace.id)}
+                  onUpdate={(updatedNamespace) =>
+                    updateNamespaceHandler(updatedNamespace)
+                  }
+                />
+              </UserInfoProvider>
             );
           })}
           <div className='flex justify-end mb-2 mr-2'>
