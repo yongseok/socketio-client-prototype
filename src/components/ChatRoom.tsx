@@ -2,16 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { useUserInfo } from './UserInfoContext';
 
-type msgType = 'text' | 'image' | 'video' | 'file' | 'system';
+type MessageType = 'text' | 'image' | 'video' | 'file' | 'system';
 
-type messageType = {
-  chatRoomName: string;
+type Message = {
+  roomName: string;
   userId: string;
-  msgType: msgType;
-  msg: string;
+  type: MessageType;
+  content: string;
 };
 
-export type ChatRoomType = {
+export type ChatRoomInfo = {
   roomName: string;
 };
 
@@ -19,7 +19,7 @@ type ChatRoomProps = {
   socket: Socket | null;
   chatRoomName: string;
   closeRoom: () => void;
-  updateChatRoom: (updatedRoom: ChatRoomType) => void;
+  updateChatRoom: (updatedRoom: ChatRoomInfo) => void;
 };
 const ChatRoom = ({
   socket,
@@ -54,28 +54,28 @@ const ChatRoom = ({
   };
 
   const formattedMessage = useCallback(
-    (messageObject: messageType) => {
+    (messageObject: Message) => {
       const date = new Date();
       const isMe = userId === messageObject.userId;
       console.log('🚀 | formattedMessage | userId:', userId);
       const sendInfo =
-        messageObject.msgType === 'system'
+        messageObject.type === 'system'
           ? '[system]'
           : isMe
           ? ''
           : `[${messageObject.userId} ]`;
-      return `[${date.toISOString()}] ${sendInfo} ${messageObject.msg}`;
+      return `[${date.toISOString()}] ${sendInfo} ${messageObject.content}`;
     },
     [userId]
   );
 
   const sendHandler = () => {
     if (socket) {
-      const msgObject: messageType = {
-        chatRoomName: '',
+      const msgObject: Message = {
+        roomName: '',
         userId,
-        msgType: 'text',
-        msg: message,
+        type: 'text',
+        content: message,
       };
       setChatTextarea(
         (prevChatTextarea) =>
@@ -98,11 +98,11 @@ const ChatRoom = ({
 
   useEffect(() => {
     if (socket) {
-      const messageListener = (msgObject: messageType) => {
-        if (msgObject.chatRoomName === joinedRoomChatName) {
+      const messageListener = (messageObject: Message) => {
+        if (messageObject.roomName === joinedRoomChatName) {
           setChatTextarea(
             (prevChatTextarea) =>
-              prevChatTextarea + '\n' + formattedMessage(msgObject)
+              prevChatTextarea + '\n' + formattedMessage(messageObject)
           );
         }
       };

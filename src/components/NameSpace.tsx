@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import ChatRoom, { ChatRoomType } from './ChatRoom';
+import ChatRoom, { ChatRoomInfo } from './ChatRoom';
 import { io, Socket } from 'socket.io-client';
 import { useUserInfo } from './UserInfoContext';
 
@@ -95,6 +95,9 @@ const NameSpace = ({
       socket.on('join-room', (roomName) => {
         log(`join room: ${roomName}`);
       });
+      socket.on('chatroomList', (chatroomList) => {
+        log(`chatroomList: ${JSON.stringify(chatroomList, null, 2)}`);
+      });
     }
     return () => {
       socket && socket.disconnect();
@@ -138,7 +141,7 @@ const NameSpace = ({
     onUpdate({ id, host, namespace, port });
   }, [id, host, namespace, port]); // FIXME: onUpdate를 종속성에 추가하면 무한 루프가 발생합니다.
 
-  const updateChatrooms = (index: number, updateChatroom: ChatRoomType) => {
+  const updateChatrooms = (index: number, updateChatroom: ChatRoomInfo) => {
     setRooms((prevRooms) => {
       const updatedRooms = [...prevRooms];
       updatedRooms[index] = updateChatroom.roomName;
